@@ -1,6 +1,8 @@
 # django-nanoid
-
 [A tiny, secure, URL-friendly, unique string ID generator for Python.](https://github.com/puyuan/py-nanoid) support in [Django](https://www.djangoproject.com/).
+
+[![PyPI Version](https://badge.fury.io/py/django-nanoid.svg)](https://badge.fury.io/py/django-nanoid)
+[![PyPI Versions](https://img.shields.io/pypi/pyversions/django-nanoid.svg)](https://pypi.python.org/pypi/django-nanoid)
 
 ### Status
 
