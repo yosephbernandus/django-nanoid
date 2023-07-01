@@ -21,7 +21,7 @@ To install nanoid from source:
 
 ### Usage
 
-Adding a NANOID field to your Django models is straightforward
+Adding a NANOID field to your Django models is straightforward, default length is 21. Can adjust the length using max_length
 
 ```python
 from django.db import models
