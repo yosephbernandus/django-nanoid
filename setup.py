@@ -18,11 +18,14 @@ setup(
     packages=['django_nanoid'],
     url='https://github.com/yosephbernandus/django-nanoid',
     license='Apache 2.0',
-    description='Universally Unique Lexicographically Sortable Identifier (ULID) support in Django',
+    description='A tiny, secure, URL-friendly, unique string ID generator support in Django',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     package_data={'': ['README.md']},
-    install_requires=['django>=1.9', 'nanoid', 'djangorestframework>=3.0.0'],
+    install_requires=['Django>=1.9', 'nanoid', 'djangorestframework>=3.0.0'],
+    extras_require={
+        "dev": ["pytest>=7.0", "twine>=4.0.2"],
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
