@@ -35,7 +35,7 @@ class NANOIDField(models.Field):
         kwargs['secure_generated'] = self.secure_generated
         kwargs['alphabetically'] = self.alphabetically
         kwargs['size'] = self.size
-        kwargs['prefix'] = self.size
+        kwargs['prefix'] = self.prefix
         return name, path, args, kwargs
 
     def get_internal_type(self):
