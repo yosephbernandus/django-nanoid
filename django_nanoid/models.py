@@ -12,6 +12,7 @@ class NANOIDField(models.Field):
         self.secure_generated = kwargs.pop('secure_generated', True)
         self.alphabetically = kwargs.pop('alphabetically', None)
         self.size = kwargs.pop('size', None)
+        self.prefix = kwargs.pop('prefix', None)
 
         if self.size and not isinstance(self.size, int):
             raise ValueError("Size parameter must be an integer.")
@@ -34,6 +35,7 @@ class NANOIDField(models.Field):
         kwargs['secure_generated'] = self.secure_generated
         kwargs['alphabetically'] = self.alphabetically
         kwargs['size'] = self.size
+        kwargs['prefix'] = self.prefix
         return name, path, args, kwargs
 
     def get_internal_type(self):
@@ -55,6 +57,8 @@ class NANOIDField(models.Field):
         value = getattr(model_instance, self.attname)
         if value is None and add:
             value = self.generate_nanoid()
+            if self.prefix:
+                value = self.prefix + value
             setattr(model_instance, self.attname, value)
         return value
 
