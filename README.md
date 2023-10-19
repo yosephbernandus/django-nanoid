@@ -58,3 +58,9 @@ Pull requests will be brought into the `master` branch via a rebase and fast-for
 
 * [Django](https://github.com/django/django)
 * [py-nanoid](https://github.com/puyuan/py-nanoid.git)
+
+## Changelog
+
+### Version 0.0.2 (2023-10-19)
+
+* Support nanoid prefix. Thanks lodye509!
