@@ -64,6 +64,8 @@ class NANOIDField(models.Field):
             value = self.generate_nanoid()
             if self.prefix:
                 value = self.prefix + value
+            if not self.case_sensitive:
+                value = str(value).lower()
             setattr(model_instance, self.attname, value)
         return value
 
