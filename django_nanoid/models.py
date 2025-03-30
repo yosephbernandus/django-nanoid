@@ -11,6 +11,7 @@ class NANOIDField(models.Field):
         self.editable = kwargs.pop('editable', True)
         self.secure_generated = kwargs.pop('secure_generated', True)
         self.alphabetically = kwargs.pop('alphabetically', None)
+        self.case_sensitive = kwargs.pop('case_sensitive', True)
         self.size = kwargs.pop('size', None)
         self.prefix = kwargs.pop('prefix', None)
 
@@ -25,6 +26,9 @@ class NANOIDField(models.Field):
 
         if self.alphabetically and not self.size:
             raise ValueError("Need to specify a size parameter")
+        
+        if self.case_sensitive and not isinstance(self.case_sensitive, bool):
+            raise ValueError("Case sensitive parameter must be a boolean.")
 
         kwargs.setdefault('max_length', 21)
         super().__init__(verbose_name, **kwargs)
@@ -36,6 +40,7 @@ class NANOIDField(models.Field):
         kwargs['alphabetically'] = self.alphabetically
         kwargs['size'] = self.size
         kwargs['prefix'] = self.prefix
+        kwargs['case_sensitive'] = self.case_sensitive
         return name, path, args, kwargs
 
     def get_internal_type(self):
@@ -59,11 +64,13 @@ class NANOIDField(models.Field):
             value = self.generate_nanoid()
             if self.prefix:
                 value = self.prefix + value
+            if not self.case_sensitive:
+                value = str(value).lower()
             setattr(model_instance, self.attname, value)
         return value
 
     def get_prep_value(self, value):
         value = super().get_prep_value(value)
         if value is not None and self.alphabetically:
-            value = str(value).lower()
+            value = str(value).lower() if not self.case_sensitive else str(value)
         return value
